@@ -22,6 +22,6 @@ Commits `1251965` and `23f6275` in the first private repo quoted the owner's wor
 domain and home path. The build session could not force-push, so this was left to the owner.
 
 It is resolved by recreating `vulbsti/priorlog` from one clean commit of the current, verified-clean
-tree, without the old history. The old repo is kept private as `vulbsti/priorlog-history`. Commit
+tree, without the old history. The old repository was deleted on 2026-11-12. Commit
 SHAs cited as evidence elsewhere (`VERIFICATION.md`, `docs/benchmarks.md`, the benchmark JSON)
 refer to that old history.

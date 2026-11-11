@@ -225,7 +225,7 @@ replaced. Reproduce: `uv run python bench/generate.py DIR && uv run python bench
 | Sources read-only | PASS | Source-tree mtimes under criterion 9. Code was ported by reading, never by editing the originals. |
 | The existing session-history tool, its timers and its data dir untouched | PASS | Criterion 7, and the before/after diff in `docs/verification/real-data-smoke.md`. |
 | No personal data committed | PASS | The standard's privacy grep (home path, work email domain, owner's first name, any email address) over the tree (excluding `.git`, `.venv` and `uv.lock`) finds nothing except the noreply author and the fake `example.org`/`example.com` addresses in fixtures and tests. Fixtures are synthetic, real-data checks were aggregate-only, and their scratch index was deleted. |
-| No personal strings in history | RESOLVED (2026-11-12) | Commit `1251965`, and the first version of the B2 recipe in `23f6275`, contained the owner's work handle, employer domain and home path. The repo is recreated from one clean commit of the current tree, and the old repo is kept private as `vulbsti/priorlog-history` (BLOCKED.md B2). |
+| No personal strings in history | RESOLVED (2026-11-12) | Commit `1251965`, and the first version of the B2 recipe in `23f6275`, contained the owner's work handle, employer domain and home path. The repo is recreated from one clean commit of the current tree, and The old repository was deleted on 2026-11-12 (BLOCKED.md B2). |
 | gitleaks over full history: 0 findings | PASS | `docker run --rm -v "$PWD:/r" zricethezav/gitleaks git /r` gives `no leaks found` (output under Final checks). |
 | rm never used; deletions moved to `~/proj/TRASH` | PASS | Scratch indexes, temp homes and the old venv were all moved to `~/proj/TRASH/`. |
 
@@ -400,10 +400,10 @@ Round 7 also noted that the MCP end-to-end runs were recorded at `c525f73`.
 flow in CI on every push.
 
 CI for the tagged commit (`v0.1.0` = `f6cef3b`): green,
-[run 42178449305](https://github.com/vulbsti/priorlog-history/actions/runs/42178449305): lint plus `test`
+run 42178449305 (pre-release repository, deleted): lint plus `test`
 on ubuntu-latest and macos-latest × Python 3.11, 3.12 and 3.13, all `success`. This line was added
 in the commit after the tag, since a commit can't name its own run.
 
 ## CI on the re-created repository (2026-11-12)
 
-The repository was re-created from clean history on 2026-11-12 (BLOCKED.md → Resolved). Earlier run links point into the private archive `vulbsti/priorlog-history`. First CI run on the new repository: [run 43094089924](https://github.com/vulbsti/priorlog/actions/runs/43094089924) on `33427d8` (the published release commit): lint plus test on ubuntu-latest and macos-latest × Python 3.11, 3.12, 3.13: 7/7 success. Before the push, every object was checked by the owner's out-of-repo privacy gate (private-terms scan of text, messages and binary strings; author identities; gitleaks): 0 findings.
+The repository was re-created from clean history on 2026-11-12 (BLOCKED.md → Resolved). Earlier run ids refer to the pre-release repository, which was deleted on 2026-11-12. First CI run on the new repository: [run 43094089924](https://github.com/vulbsti/priorlog/actions/runs/43094089924) on `33427d8` (the published release commit): lint plus test on ubuntu-latest and macos-latest × Python 3.11, 3.12, 3.13: 7/7 success. Before the push, every object was checked by the owner's out-of-repo privacy gate (private-terms scan of text, messages and binary strings; author identities; gitleaks): 0 findings.

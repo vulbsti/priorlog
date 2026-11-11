@@ -16,7 +16,7 @@ GH_TOKEN=$(gh auth token -u vulbsti) gh run list --repo vulbsti/priorlog --limit
 ## 1. Final checks before going public
 
 The history with personal strings is already replaced: the repo is recreated from one clean
-commit, and the old history is kept private as `vulbsti/priorlog-history` (BLOCKED.md B2).
+commit, and the old repository was deleted on 2026-11-12 (BLOCKED.md B2).
 
 ```bash
 docker run --rm -v "$PWD:/r" zricethezav/gitleaks git /r
