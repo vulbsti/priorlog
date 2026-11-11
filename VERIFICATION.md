@@ -400,6 +400,10 @@ Round 7 also noted that the MCP end-to-end runs were recorded at `c525f73`.
 flow in CI on every push.
 
 CI for the tagged commit (`v0.1.0` = `f6cef3b`): green,
-[run 42178449305](https://github.com/vulbsti/priorlog/actions/runs/42178449305): lint plus `test`
+[run 42178449305](https://github.com/vulbsti/priorlog-history/actions/runs/42178449305): lint plus `test`
 on ubuntu-latest and macos-latest × Python 3.11, 3.12 and 3.13, all `success`. This line was added
 in the commit after the tag, since a commit can't name its own run.
+
+## CI on the re-created repository (2026-11-12)
+
+The repository was re-created from clean history on 2026-11-12 (BLOCKED.md → Resolved). Earlier run links point into the private archive `vulbsti/priorlog-history`. First CI run on the new repository: [run 43094089924](https://github.com/vulbsti/priorlog/actions/runs/43094089924) on `33427d8` (the published release commit): lint plus test on ubuntu-latest and macos-latest × Python 3.11, 3.12, 3.13: 7/7 success. Before the push, every object was checked by the owner's out-of-repo privacy gate (private-terms scan of text, messages and binary strings; author identities; gitleaks): 0 findings.
