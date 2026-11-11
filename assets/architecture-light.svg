@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="700" viewBox="0 0 960 700" role="img" aria-labelledby="ttl">
+<title id="ttl">priorlog architecture: transcripts from Claude Code, Claude desktop, Codex, Pi and JSONL logs pass through adapters, the sync engine and the broker (path policy, deny rules, redaction) into a SQLite FTS5 index, which the query layer serves to agents through the MCP server, CLI and skill.</title>
+<style>
+  text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; fill: #1f2328; }
+  .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; }
+  .t { font-size: 14px; font-weight: 600; }
+  .b { font-size: 12.5px; fill: #59636e; }
+  .m { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; font-size: 12px; fill: #59636e; }
+  .h { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; fill: #818b98; }
+  .acc { fill: #b45309; }
+  .box { fill: #f6f8fa; stroke: #d1d9e0; stroke-width: 1; }
+  .edge { stroke: #8c959f; stroke-width: 1.4; fill: none; }
+  .bound { fill: none; stroke: #8c959f; stroke-width: 1; stroke-dasharray: 5 4; }
+</style>
+<defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#8c959f"/>
+  </marker>
+  <marker id="arrA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#b45309"/>
+  </marker>
+</defs>
+<rect x="4" y="4" width="952" height="692" rx="14" class="bound"/>
+<text x="938" y="682" class="b" text-anchor="end" style="font-style: italic">your machine · priorlog makes no network calls; MCP runs over stdio</text>
+<text x="24" y="34" class="h" text-anchor="start">SOURCES</text>
+<text x="300" y="34" class="h" text-anchor="start">WRITE PATH  ·  priorlog sync</text>
+<text x="680" y="34" class="h" text-anchor="start">READ PATH</text>
+<rect x="14" y="46" width="256" height="404" rx="10" class="bound"/>
+<rect x="24" y="60" width="236" height="58" rx="8" class="box"/>
+<text x="38" y="84" class="t" text-anchor="start">Claude Code</text>
+<text x="38" y="104" class="m" text-anchor="start">~/.claude/projects/**.jsonl</text>
+<rect x="24" y="130" width="236" height="58" rx="8" class="box"/>
+<text x="38" y="154" class="t" text-anchor="start">Claude desktop app</text>
+<text x="38" y="174" class="m" text-anchor="start">…/Claude/**/local_*.json</text>
+<rect x="24" y="200" width="236" height="58" rx="8" class="box"/>
+<text x="38" y="224" class="t" text-anchor="start">Codex CLI</text>
+<text x="38" y="244" class="m" text-anchor="start">~/.codex/sessions/**.jsonl</text>
+<rect x="24" y="270" width="236" height="58" rx="8" class="box"/>
+<text x="38" y="294" class="t" text-anchor="start">Pi</text>
+<text x="38" y="314" class="m" text-anchor="start">~/.pi/agent/sessions/**.jsonl</text>
+<rect x="24" y="340" width="236" height="58" rx="8" class="box"/>
+<text x="38" y="364" class="t" text-anchor="start">Any JSONL log</text>
+<text x="38" y="384" class="m" text-anchor="start">[[sources.jsonl]] field map</text>
+<text x="142.0" y="438" class="b" text-anchor="middle" style="font-weight:600">opened read-only · never modified</text>
+<path d="M260,89 H280" class="edge"/>
+<path d="M260,159 H280" class="edge"/>
+<path d="M260,229 H280" class="edge"/>
+<path d="M260,299 H280" class="edge"/>
+<path d="M260,369 H280" class="edge"/>
+<path d="M280,89 V369" class="edge"/>
+<path d="M280,89 H298" class="edge" marker-end="url(#arr)"/>
+<rect x="300" y="60" width="344" height="80" rx="8" class="box"/>
+<text x="316" y="86" class="t" text-anchor="start">Adapters</text>
+<text x="316" y="106" class="m" text-anchor="start">claude · codex · pi · jsonl</text>
+<text x="316" y="126" class="b" text-anchor="start">each line → message + its L-range locator</text>
+<path d="M472.0,140 V164" class="edge" marker-end="url(#arr)"/>
+<rect x="300" y="166" width="344" height="80" rx="8" class="box"/>
+<text x="316" y="192" class="t" text-anchor="start">Sync engine</text>
+<text x="316" y="212" class="b" text-anchor="start">byte offset + inode per file, file lock</text>
+<text x="316" y="232" class="b" text-anchor="start">unchanged file = one stat · open tail re-read</text>
+<path d="M472.0,246 V270" class="edge" marker-end="url(#arr)"/>
+<rect x="300" y="272" width="344" height="196" rx="8" fill="#fff7ed" stroke="#b45309" stroke-width="2"/>
+<text x="316" y="298" class="t" text-anchor="start">Broker / Store</text>
+<text x="628" y="298" class="b" text-anchor="end" style="fill:#b45309;font-weight:600">every write</text>
+<circle cx="326" cy="330" r="9" fill="none" stroke="#b45309" stroke-width="1.4"/>
+<text x="326" y="334" class="t" text-anchor="middle" style="font-size:11px;fill:#b45309">1</text>
+<text x="344" y="335" class="t" text-anchor="start" style="font-size:13px">Path policy</text>
+<text x="344" y="353" class="b" text-anchor="start">source roots only; ~/.ssh, .env, auth.json denied</text>
+<circle cx="326" cy="376" r="9" fill="none" stroke="#b45309" stroke-width="1.4"/>
+<text x="326" y="380" class="t" text-anchor="middle" style="font-size:11px;fill:#b45309">2</text>
+<text x="344" y="381" class="t" text-anchor="start" style="font-size:13px">Deny rules</text>
+<text x="344" y="399" class="b" text-anchor="start">lines matching deny_content are dropped</text>
+<circle cx="326" cy="422" r="9" fill="none" stroke="#b45309" stroke-width="1.4"/>
+<text x="326" y="426" class="t" text-anchor="middle" style="font-size:11px;fill:#b45309">3</text>
+<text x="344" y="427" class="t" text-anchor="start" style="font-size:13px">Redaction</text>
+<text x="344" y="445" class="b" text-anchor="start">keys, tokens, emails → [REDACTED:kind]</text>
+<path d="M472.0,468 V492" class="edge" marker-end="url(#arr)"/>
+<rect x="300" y="494" width="344" height="112" rx="8" class="box"/>
+<text x="316" y="520" class="t" text-anchor="start">SQLite index</text>
+<text x="628" y="520" class="m" text-anchor="end">FTS5 · trigram</text>
+<text x="316" y="540" class="m" text-anchor="start">~/.local/share/priorlog/index.sqlite3</text>
+<rect x="316" y="558" width="47.0" height="22" rx="4" fill="#ffffff" stroke="#d1d9e0"/>
+<text x="339.5" y="573" class="m" text-anchor="middle">files</text>
+<rect x="371.0" y="558" width="69.2" height="22" rx="4" fill="#ffffff" stroke="#d1d9e0"/>
+<text x="405.6" y="573" class="m" text-anchor="middle">sessions</text>
+<rect x="448.2" y="558" width="69.2" height="22" rx="4" fill="#ffffff" stroke="#d1d9e0"/>
+<text x="482.8" y="573" class="m" text-anchor="middle">messages</text>
+<rect x="525.4" y="558" width="47.0" height="22" rx="4" fill="#ffffff" stroke="#d1d9e0"/>
+<text x="548.9" y="573" class="m" text-anchor="middle">links</text>
+<rect x="580.4" y="558" width="47.0" height="22" rx="4" fill="#ffffff" stroke="#d1d9e0"/>
+<text x="603.9" y="573" class="m" text-anchor="middle">stats</text>
+<rect x="680" y="60" width="256" height="80" rx="8" class="box"/>
+<text x="696" y="86" class="t" text-anchor="start">Agents</text>
+<text x="696" y="106" class="b" text-anchor="start">Claude Code · Codex · Pi</text>
+<text x="696" y="126" class="b" text-anchor="start">any MCP client</text>
+<path d="M808.0,164 V142" class="edge" marker-end="url(#arr)"/>
+<rect x="680" y="166" width="256" height="162" rx="8" class="box"/>
+<text x="696" y="196" class="t" text-anchor="start" style="font-size:13px">MCP server</text>
+<text x="696" y="214" class="b" text-anchor="start">tools: search · read · sessions · status</text>
+<path d="M694,224 H922" stroke="#d1d9e0"/>
+<text x="696" y="246" class="t" text-anchor="start" style="font-size:13px">CLI</text>
+<text x="696" y="264" class="m" text-anchor="start">priorlog search | read | …</text>
+<path d="M694,274 H922" stroke="#d1d9e0"/>
+<text x="696" y="296" class="t" text-anchor="start" style="font-size:13px">Agent skill</text>
+<text x="696" y="314" class="m" text-anchor="start">SKILL.md: when to look back</text>
+<path d="M808.0,352 V330" class="edge" marker-end="url(#arr)"/>
+<rect x="680" y="354" width="256" height="252" rx="8" class="box"/>
+<text x="696" y="380" class="t" text-anchor="start">Query</text>
+<text x="696" y="404" class="mono" text-anchor="start" style="font-size:12px;fill:#1f2328;font-weight:600">search</text>
+<text x="748.4" y="404" class="b" text-anchor="start">bm25-ranked FTS5 match</text>
+<text x="696" y="426" class="mono" text-anchor="start" style="font-size:12px;fill:#1f2328;font-weight:600">read</text>
+<text x="733.6" y="426" class="b" text-anchor="start">cite → message ± context</text>
+<text x="696" y="448" class="mono" text-anchor="start" style="font-size:12px;fill:#1f2328;font-weight:600">read --source</text>
+<text x="800.2" y="448" class="b" text-anchor="start">exact raw lines</text>
+<path d="M694,482 H922" stroke="#d1d9e0"/>
+<text x="696" y="508" class="b" text-anchor="start">every hit carries a citation</text>
+<text x="696" y="530" class="b" text-anchor="start">cite</text>
+<text x="746" y="530" class="m" text-anchor="start" style="fill:#b45309">claude:aaaaaaaa-…#0</text>
+<text x="696" y="550" class="b" text-anchor="start">source</text>
+<text x="746" y="550" class="m" text-anchor="start" style="fill:#b45309">…/aaaaaaaa-….jsonl:L2</text>
+<path d="M644,550.0 H678" class="edge" marker-end="url(#arr)"/>
+<path d="M808.0,606 V646 H142.0 V454" fill="none" stroke="#b45309" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#arrA)"/>
+<text x="475.0" y="638" class="b" text-anchor="middle" style="fill:#b45309">read --source re-opens the cited lines, re-checks the policy and redacts again</text>
+</svg>

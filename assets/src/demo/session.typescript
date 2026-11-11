@@ -1,0 +1,42 @@
+Script started on 2026-11-06 01:12:41+00:00 [COMMAND="bash assets/src/demo/session.sh" <not executed on terminal>]
+[36m~[0m [32m$[0m priorlog sync
+7 files (7 changed, 0 denied), 18 new messages in 0.03s
+[36m~[0m [32m$[0m priorlog status
+index: ~/.local/share/priorlog/index.sqlite3 (0.1 MB) · last sync: 2026-11-06T01:12:43Z · 7 files
+  claude           4 sessions    10 messages
+  codex            1 session     2 messages
+  jsonl:supportbot 3 sessions    4 messages
+  pi               1 session     2 messages
+redactions: anthropic_key 1, email 1
+dropped by deny_content: 0 · malformed lines: 1
+unfamiliar line types (skipped): claude:some-future-type (1)
+[36m~[0m [32m$[0m priorlog search rate limiter
+2 hit(s) for `rate limiter` (2 matching messages in 2 sessions).
+
+[1] Orders API rate limiting · claude · 2026-10-01 09:00 · user
+    > The API is getting hammered. Design a «rate limiter» for /v1/orders.
+    cite: claude:aaaaaaaa-1111-4111-8111-000000000001#0   source: ~/.claude/projects/-work-demo-app/aaaaaaaa-1111-4111-8111-000000000001.jsonl:L2
+[2] Staging 429s · claude · 2026-10-06 16:20 · user
+    > Staging returns 429 on the very first call, so the «rate limiter» is wrong. Repro: curl -H "x-api-key: [REDACTED:anthropic_key]" https://staging.demo.test/v1/orders
+    cite: claude:dddddddd-4444-4444-8444-000000000004#0   source: ~/.claude/projects/-work-demo-app/dddddddd-4444-4444-8444-000000000004.jsonl:L1
+
+Open a hit: priorlog read <cite>   (add --source for the original transcript lines)
+[36m~[0m [32m$[0m priorlog read claude:dddddddd-4444-4444-8444-000000000004#0 --source --context 1
+# Staging 429s
+- session: claude:dddddddd-4444-4444-8444-000000000004 · harness: claude · 2 messages
+- cwd: /work/demo-app
+- branch: fix/429
+- transcript: ~/.claude/projects/-work-demo-app/dddddddd-4444-4444-8444-000000000004.jsonl
+- resume: cd /work/demo-app && claude --resume dddddddd-4444-4444-8444-000000000004
+- active: 2026-10-06 16:20 → 2026-10-06 16:21
+
+▶ [user · 2026-10-06 16:20 · claude:dddddddd-4444-4444-8444-000000000004#0 · ~/.claude/projects/-work-demo-app/dddddddd-4444-4444-8444-000000000004.jsonl:L1]
+Staging returns 429 on the very first call, so the rate limiter is wrong. Repro: curl -H "x-api-key: [REDACTED:anthropic_key]" https://staging.demo.test/v1/orders
+
+[assistant · 2026-10-06 16:21 · claude:dddddddd-4444-4444-8444-000000000004#1 · ~/.claude/projects/-work-demo-app/dddddddd-4444-4444-8444-000000000004.jsonl:L2]
+Found it: behind the load balancer every request had the same client IP, so all keys shared one bucket. The limiter now keys buckets on a hash of the API key.
+
+Original transcript lines (redacted):
+  L1: {"sessionId": "dddddddd-4444-4444-8444-000000000004", "cwd": "/work/demo-app", "gitBranch": "fix/429", "type": "user", "timestamp": "2026-10-06T16:20:00Z", "message": {"role": "user", "content": "Staging returns 429 on the very first call, so the rate limiter is wrong. Repro: curl -H \"x-api-key: [REDACTED:anthropic_key]\" https://staging.demo.test/v1/orders"}}
+[36m~[0m [32m$[0m 
+Script done on 2026-11-06 01:13:00+00:00 [COMMAND_EXIT_CODE="0"]

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/vulbsti/priorlog/security/advisories/new
+    about: Unredacted secrets, policy bypasses and other security problems. Reported privately.
+  - name: Documentation
+    url: https://github.com/vulbsti/priorlog/tree/main/docs
+    about: Configuration, usage and architecture docs.

@@ -1,0 +1,51 @@
+name: Feature request
+description: Suggest a new harness, filter, command or improvement.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check [docs/ROADMAP.md](https://github.com/vulbsti/priorlog/blob/main/docs/ROADMAP.md)
+        first; your idea may already be listed. Do not paste real transcripts or secrets.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What are you trying to do, and what gets in the way today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Commands, flags, config keys or MCP tool parameters you have in mind.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - New harness adapter
+        - Search and read
+        - Redaction and policy
+        - Sync
+        - MCP server or skill
+        - Packaging and platforms
+        - Documentation
+        - Other
+  - type: textarea
+    id: format
+    attributes:
+      label: Transcript format (for a new harness)
+      description: |
+        Where the harness stores sessions and a few synthetic lines showing the format.
+        Invented content only.
+      render: text
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: The change keeps priorlog local-only (no network access, no cloud sources).
+        - label: I am willing to open a pull request for this.

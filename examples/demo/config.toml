@@ -1,0 +1,23 @@
+# Demo config: points priorlog at the synthetic sample transcripts in tests/fixtures.
+# Relative paths are resolved against this file's folder. Try it from a checkout:
+#   export PRIORLOG_CONFIG=$PWD/examples/demo/config.toml PRIORLOG_HOME=$(mktemp -d)
+#   priorlog sync && priorlog search rate limiter
+
+[sources.claude]
+roots = ["../../tests/fixtures/claude/projects"]
+desktop_roots = ["../../tests/fixtures/claude/desktop"]
+
+[sources.codex]
+roots = ["../../tests/fixtures/codex/sessions"]
+
+[sources.pi]
+roots = ["../../tests/fixtures/pi/sessions"]
+
+[[sources.jsonl]]
+name = "supportbot"
+paths = ["../../tests/fixtures/jsonl/*.jsonl"]
+text = "body.text"
+role = "speaker"
+session = "conversation_id"
+timestamp = "ts"
+role_map = { customer = "user", bot = "assistant" }

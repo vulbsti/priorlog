@@ -1,0 +1,55 @@
+[project]
+name = "priorlog"
+version = "0.1.0"
+description = "Local, cross-harness memory for coding agents: index Claude Code, Codex CLI, Pi and JSONL transcripts, redact secrets, search with citations over MCP and CLI."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "vulbsti" }]
+requires-python = ">=3.11"
+keywords = ["mcp", "claude-code", "codex", "agent-memory", "transcripts", "sqlite", "fts5"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development",
+]
+dependencies = ["mcp>=2.1,<3"]
+
+[project.urls]
+Homepage = "https://github.com/vulbsti/priorlog"
+Issues = "https://github.com/vulbsti/priorlog/issues"
+
+[project.scripts]
+priorlog = "priorlog.cli:main"
+
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/priorlog"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"skills/priorlog/SKILL.md" = "priorlog/skill/SKILL.md"
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM"]
+ignore = ["E501", "SIM108"]

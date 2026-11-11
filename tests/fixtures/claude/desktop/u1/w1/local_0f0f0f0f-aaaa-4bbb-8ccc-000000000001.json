@@ -1,0 +1,14 @@
+{
+ "sessionId": "local_0f0f0f0f-aaaa-4bbb-8ccc-000000000001",
+ "cliSessionId": "aaaaaaaa-1111-4111-8111-000000000001",
+ "cwd": "/work/demo-app",
+ "createdAt": 1790845200000,
+ "title": "Orders API rate limiting",
+ "model": "claude-x",
+ "bridgeSessionIds": [
+  "cse_NOT_USED"
+ ],
+ "remoteControlSpawn": {
+  "ccrSessionId": "cse_NOT_USED"
+ }
+}

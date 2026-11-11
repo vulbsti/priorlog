@@ -1,0 +1,2 @@
+{"type": "user", "sessionId": "aaaaaaaa-1111-4111-8111-000000000001", "isSidechain": true, "timestamp": "2026-10-01T09:01:00Z", "message": {"role": "user", "content": "Benchmark token bucket vs sliding window in Redis"}}
+{"type": "assistant", "sessionId": "aaaaaaaa-1111-4111-8111-000000000001", "isSidechain": true, "timestamp": "2026-10-01T09:02:00Z", "message": {"role": "assistant", "content": [{"type": "text", "text": "Token bucket: 0.21 ms p95 per check; sliding window log: 0.94 ms p95 at 1k req/s."}]}}

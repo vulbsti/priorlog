@@ -1,0 +1,5 @@
+{"conversation_id": "conv-7", "speaker": "customer", "ts": "2026-10-05T12:00:00Z", "body": {"text": "My export to CSV times out after 30 seconds"}}
+{"conversation_id": "conv-7", "speaker": "bot", "ts": "2026-10-05T12:00:03Z", "body": {"text": "Exports over 50k rows now run as a background job and email a download link."}}
+{"conversation_id": "conv-8", "speaker": "customer", "ts": "2026-10-06T09:00:00Z", "body": {"text": "How do I rotate my webhook signing secret?"}}
+{"conversation_id": "conv-8", "speaker": "bot", "ts": "2026-10-06T09:00:02Z", "body": {}}
+{"conversation_id": "conv-9", "speaker": "customer", "ts": "2026-10-07T10:00:00Z", "body": {"text": "Invoices go to the wrong address, please send them to dana.reyes@example.com instead"}}

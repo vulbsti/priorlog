@@ -1,0 +1,87 @@
+name: Bug report
+description: Something in priorlog does not work as documented.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. **Do not paste real transcripts, secrets, tokens, emails or
+        private paths.** Replace them with placeholders (`/work/demo`, `<TOKEN>`). If the bug
+        is a secret that was not redacted, or a file that should have been denied, report it
+        privately instead: https://github.com/vulbsti/priorlog/security/advisories/new
+  - type: input
+    id: version
+    attributes:
+      label: priorlog version
+      description: Output of `priorlog --version`.
+      placeholder: priorlog 0.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - macOS
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: os-version
+    attributes:
+      label: OS and Python version
+      placeholder: Ubuntu 24.04, Python 3.12
+  - type: dropdown
+    id: harness
+    attributes:
+      label: Harness
+      description: Which transcript source is involved?
+      multiple: true
+      options:
+        - Claude Code (CLI)
+        - Claude desktop app
+        - Codex CLI
+        - Pi
+        - Generic JSONL ([[sources.jsonl]])
+        - Not harness specific
+    validations:
+      required: true
+  - type: dropdown
+    id: interface
+    attributes:
+      label: Where did it happen?
+      multiple: true
+      options:
+        - CLI
+        - MCP server
+        - Agent skill
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened, and what did you expect?
+      description: Include the exact command or MCP tool call. Redact anything private.
+    validations:
+      required: true
+  - type: textarea
+    id: status
+    attributes:
+      label: Output of `priorlog status`
+      description: It contains only counts and the index path. Check it before pasting.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: |
+        Ideally a few synthetic JSONL lines that trigger the problem (invented content only),
+        plus the relevant part of your config.toml.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed real transcript content, secrets, emails and personal paths from this report.
+          required: true
