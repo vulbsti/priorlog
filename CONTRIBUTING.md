@@ -22,8 +22,8 @@ uv run priorlog --help     # the CLI from your checkout
 ```
 
 CI (`.github/workflows/ci.yml`) runs `uv sync --locked`, `ruff check .`, `ruff format --check .`
-and `pytest` on ubuntu-latest and macos-latest with Python 3.11, 3.12 and 3.13. Run the same three
-commands before you open a pull request.
+and `pytest` on ubuntu-latest with Python 3.11, 3.12 and 3.13. A macOS job (Python 3.13) runs only on
+manual dispatch (Actions → CI → Run workflow → tick `macos`). Run the same three commands before you open a pull request.
 
 ### Trying the CLI without touching your real data
 
